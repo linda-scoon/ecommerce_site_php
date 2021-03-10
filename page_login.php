@@ -1,0 +1,89 @@
+<?php
+$page_title = 'Login';
+require('includes/site_header.php');
+
+// verifying login
+$email = '';
+$password = '';
+$msg = '';
+$loggedin = false;
+
+if (!empty($_POST)) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $loggedin = verify_login($email, $password);
+
+    if ($loggedin) {
+        $msg = '<p class="text-success err-text mt-5 fw-bolder">You have successfully logged in</p>';
+    } else {
+        $msg = '<p class="text-danger err-text mt-5 fw-bolder">Please enter a valid login</p>';
+    }
+}
+
+// display err/success message
+echo $msg;
+
+if (!$loggedin) { ?>
+    <!-- not logged in -->
+    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" class="row mt-5 mx-auto">
+        <div class="form-group col-lg-6 offset-lg-3 border p-5">
+            <h4>Sign In</h4>
+            <label for="email">Email</label>
+            <input type="email" name="email" value="<?=htmlspecialchars($email)?>" id="email" class="form-control" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" required>
+            <input type="submit" value="Submit" class="btn btn-outline-primary mt-3">
+            <p>Not yet a memeber? <a href="page_registration.php">Sign up</a></p>
+        </div>
+    </form>
+<?php
+} else { ?>
+    <!-- logged in -->
+    <h1 class="my-5">Profile Page</h1>
+    <section class="row border p-5 my-1">
+        <h4>Hello Username</h4>
+        <div class="d-md-flex col m-1">
+            <img src="img/products/aila.svg" alt="username" class="img-sm">
+            <span class="m-2">
+                <p>Name</p>
+                <p>Address</p>
+            </span>
+        </div>
+        <div class="col">
+            <form action="function_process_img.php" method="post" enctype="multipart/form-data">
+                <div class="form-group ">
+                    <h4>Update profile picture</h4>
+                    <input type="file" name="profile_pic" id="profile_pic">
+                    <input type="submit" name="submit" value="Upload Image" class="btn-primary mt-3 me-auto">
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="row">
+        <div class="col-lg p-5 border m-1">
+            <h4>Update Personal Details</h4>
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="fname">First Name</label>
+                    <input type="text" name="fname" id="fname" class="form-control">
+                    <label type="text" for="lname">Last Name</label>
+                    <input type="text" name="lname" id="lname" class="form-control">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
+                    <label for="oldpass">Old Password</label>
+                    <input type="password" name="oldpass" id="oldpass" class="form-control" required>
+                    <label for="newpass">New Password</label>
+                    <input type="password" name="newpass" id="newpass" class="form-control" required>
+                    <input value="Submit" class="btn btn-outline-primary mt-3" type="submit">
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-7 p-5 border m-1 overflow-auto orders">
+            <h4>Orders</h4>
+
+        </div>
+    </section>
+<?php
+}
+require('includes/site_footer.php');
+?>
