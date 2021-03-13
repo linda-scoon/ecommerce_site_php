@@ -4,14 +4,13 @@ require('includes/site_header.php');
 
 // verifying login
 $email = '';
-$password = '';
 $msg = '';
 $loggedin = false;
 
 if (!empty($_POST)) {
-    $email = $_POST['email'];
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = $_POST['password'];
-    $loggedin = verify_login($email, $password);
+    $loggedin = isverified_login($conn, $email, $password);
 
     if ($loggedin) {
         $msg = '<p class="text-success err-text mt-5 fw-bolder">You have successfully logged in</p>';
@@ -29,7 +28,7 @@ if (!$loggedin) { ?>
         <div class="form-group col-lg-6 offset-lg-3 border p-5">
             <h4>Sign In</h4>
             <label for="email">Email</label>
-            <input type="email" name="email" value="<?=htmlspecialchars($email)?>" id="email" class="form-control" required>
+            <input type="email" name="email" value="<?= htmlspecialchars($email) ?>" id="email" class="form-control" required>
             <label for="password">Password</label>
             <input type="password" name="password" id="password" class="form-control" required>
             <input type="submit" value="Submit" class="btn btn-outline-primary mt-3">
@@ -50,7 +49,7 @@ if (!$loggedin) { ?>
             </span>
         </div>
         <div class="col">
-            <form action="function_process_img.php" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="form-group ">
                     <h4>Update profile picture</h4>
                     <input type="file" name="profile_pic" id="profile_pic">
@@ -60,28 +59,42 @@ if (!$loggedin) { ?>
         </div>
     </section>
     <section class="row">
-        <div class="col-lg p-5 border m-1">
+        <div class="col p-5 border m-1">
             <h4>Update Personal Details</h4>
             <form action="" method="post">
                 <div class="form-group">
                     <label for="fname">First Name</label>
-                    <input type="text" name="fname" id="fname" class="form-control">
-                    <label type="text" for="lname">Last Name</label>
-                    <input type="text" name="lname" id="lname" class="form-control">
+                    <input name="fName" type="text" id="fname" class="form-control" maxlength="20" required>
+                    <label for="lname">Last Name</label>
+                    <input name="lName" type="text" id="lname" class="form-control" maxlength="20" required>
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" required>
-                    <label for="oldpass">Old Password</label>
-                    <input type="password" name="oldpass" id="oldpass" class="form-control" required>
+                    <input name="email" type="email" id="email" class="form-control" required>
+                    <label for="password">Password</label>
+                    <input name="password" type="password" id="password" class="form-control" maxlength="20" required>
+                </div>
+            </form>
+        </div>
+        <div class="col p-5 border m-1">
+            <h4>Change Password</h4>
+            <form action="" method="post">
+                <div class="form-group"><label for="oldpass">Old Password</label>
+                    <input name="oldpass" type="password" id="oldpass" class="form-control" maxlength="20" required>
                     <label for="newpass">New Password</label>
-                    <input type="password" name="newpass" id="newpass" class="form-control" required>
+                    <input name="newpass" type="text" id="newpass" class="form-control" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,20}$" title="password needs to have atleast 
+1 lowercase letter
+1 digit 
+1 uppercase letter and 
+be between 6-20 characters long" required>
+                    <label for="password2">Confirm New Password</label>
+                    <input name="password2" type="password" id="password2" class="form-control" maxlength="20" required>
                     <input value="Submit" class="btn btn-outline-primary mt-3" type="submit">
                 </div>
             </form>
         </div>
-        <div class="col-lg-7 p-5 border m-1 overflow-auto orders">
-            <h4>Orders</h4>
+    </section>
+    <section class="p-5 border m-1 overflow-auto orders">
+        <h4>Orders</h4>
 
-        </div>
     </section>
 <?php
 }

@@ -1,13 +1,34 @@
 <?php
+
 /**
  * checks the users login and returns a boolean
  */
-function verify_login($email, $password)
+function isverified_login($conn, $email, $password)
 {
-    $query = 'SELECT email, password FROM users WHERE email ==';
-    $verified = false;
-    // if ($email ===  && $password === ) {
-    //    $verified = true;
-    // }
-    return $verified;
+    $query = "SELECT email, user_password FROM users WHERE email ='" . $email . "';";
+    $result = db_fetch($conn, $query);
+
+    foreach ($result as $user) {
+        if ($email === $user['email'] && $password === $user['user_password']) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * checks if the provided email is already registered
+ * @return boolean true if email is free
+ */
+function isavailable_email($conn, $email)
+{
+    // checking database for the existance of the email
+    $query = "SELECT * FROM users WHERE email ='" . $email . "';";
+    $result = db_fetch($conn, $query);
+
+    if (empty($result)) {
+        return true;
+    }
+    print_r($result);
+    return false;
 }

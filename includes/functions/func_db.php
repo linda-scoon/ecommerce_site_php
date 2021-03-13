@@ -22,6 +22,7 @@ function db_connect($config)
 
 /**
  * queries the database and returns an array of results
+ * @return array of results
  */
 function db_fetch($conn, $query)
 {
@@ -41,4 +42,18 @@ function db_fetch($conn, $query)
         $toReturn[] = $row;
     }
     return $toReturn;
+}
+function db_insert($conn, $query)
+{
+    $confirm = mysqli_query($conn, $query);
+
+    //queries error check
+    if (!$confirm) {
+        if (DEBUG) {
+            die(mysqli_error($conn));
+        } else {
+            die('Oops something went wrong, please try again later');
+        }
+    }
+    return $confirm;
 }
