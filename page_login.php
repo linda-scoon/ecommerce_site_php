@@ -71,6 +71,7 @@ if (!$loggedin) { ?>
                     <input name="email" type="email" id="email" class="form-control" required>
                     <label for="password">Password</label>
                     <input name="password" type="password" id="password" class="form-control" maxlength="20" required>
+                    <input value="Submit" class="btn btn-outline-primary mt-3" type="submit">
                 </div>
             </form>
         </div>

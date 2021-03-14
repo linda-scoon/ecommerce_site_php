@@ -6,12 +6,12 @@ $email = '';
 $fname = '';
 $lname = '';
 $msg = '';
-$loggedin = false;
 
 if (!empty($_POST)) {
+
+    //sanitising inputs
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password1']);
-    $confirm_password = $_POST['password2'];
     $fname = mysqli_real_escape_string($conn, $_POST['fname']);
     $lname = mysqli_real_escape_string($conn, $_POST['lname']);
 

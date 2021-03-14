@@ -23,12 +23,11 @@ function isverified_login($conn, $email, $password)
 function isavailable_email($conn, $email)
 {
     // checking database for the existance of the email
-    $query = "SELECT * FROM users WHERE email ='" . $email . "';";
+    $query = "SELECT email FROM users WHERE email ='" . $email . "';";
     $result = db_fetch($conn, $query);
 
     if (empty($result)) {
         return true;
     }
-    print_r($result);
     return false;
 }
