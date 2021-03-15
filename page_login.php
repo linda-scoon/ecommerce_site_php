@@ -65,11 +65,11 @@ if (!$loggedin) { ?>
             <form action="" method="post">
                 <div class="form-group">
                     <label for="fname">First Name</label>
-                    <input name="fName" type="text" id="fname" pattern="^[a-zA-Z]+$" class="form-control" maxlength="20" required>
+                    <input name="fName" type="text" id="fname" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20" required>
                     <label for="lname">Last Name</label>
-                    <input name="lName" type="text" id="lname" pattern="^[a-zA-Z]+$" class="form-control" maxlength="20" required>
+                    <input name="lName" type="text" id="lname" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20" required>
                     <label for="email">Email</label>
-                    <input name="email" type="email" id="email" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" class="form-control" required>
+                    <input name="email" type="email" id="email" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" placeholder="email@example.com" title="please enter a valid email" class="form-control" required>
                     <label for="password">Password</label>
                     <input name="password" type="password" id="password" class="form-control" maxlength="20" required>
                     <input value="Submit" class="btn btn-outline-primary mt-3" type="submit">

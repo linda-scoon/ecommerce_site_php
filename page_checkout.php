@@ -9,11 +9,11 @@ require('includes/site_header.php');
             <h4>Contact Information</h4>
             <div class="form-group">
                 <label for="fname">First Name</label>
-                <input type="text" name="fname" id="fname" pattern="^[a-zA-Z]+$" class="form-control">
+                <input type="text" name="fname" id="fname" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control">
                 <label for="lname">Last Name</label>
-                <input type="text" name="lname" id="lname" pattern="^[a-zA-Z]+$" class="form-control">
+                <input type="text" name="lname" id="lname" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" class="form-control">
+                <input type="email" name="email" id="email" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" placeholder="email@example.com" title="please enter a valid email" class="form-control">
                 <label for="tel">Phone</label>
                 <input type="tel" name="tel" id="tel" class="form-control" required>
             </div>

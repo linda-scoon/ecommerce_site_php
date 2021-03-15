@@ -39,7 +39,7 @@ echo $msg;
         <label for="lname">Last Name</label>
         <input name="lname" value="<?= htmlspecialchars($lname) ?>" type="text" id="lname" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20" required>
         <label for="email">Email</label>
-        <input name="email" value="<?= htmlspecialchars($email) ?>" type="email" id="email" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" class="form-control" required>
+        <input name="email" value="<?= htmlspecialchars($email) ?>" type="email" id="email" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" placeholder="email@example.com" title="please enter a valid email" class="form-control" required>
         <label for="password1">Password</label>
         <input name="password1" type="password" id="password1" class="form-control" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,20}$" title="password needs to have atleast 
 1 lowercase letter 
