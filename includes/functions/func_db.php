@@ -43,6 +43,11 @@ function db_fetch($conn, $query)
     }
     return $toReturn;
 }
+
+/**
+ * runs the given query
+ * @return true if query was successful or false if query failed
+ */
 function db_insert($conn, $query)
 {
     $confirm = mysqli_query($conn, $query);

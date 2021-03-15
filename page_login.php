@@ -5,6 +5,7 @@ require('includes/site_header.php');
 // verifying login
 $email = '';
 $msg = '';
+$user;
 $loggedin = false;
 
 if (!empty($_POST)) {
@@ -14,6 +15,10 @@ if (!empty($_POST)) {
 
     if ($loggedin) {
         $msg = '<p class="text-success err-text mt-5 fw-bolder">You have successfully logged in</p>';
+
+        // getting name to display
+        $query = "SELECT fname, lname FROM Users WHERE email='" . $email . "'";
+        $user = db_fetch($conn, $query);
     } else {
         $msg = '<p class="text-danger err-text mt-5 fw-bolder">Please enter a valid login</p>';
     }
@@ -40,13 +45,9 @@ if (!$loggedin) { ?>
     <!-- logged in -->
     <h1 class="my-5">Profile Page</h1>
     <section class="row border p-5 my-1">
-        <h4>Hello Username</h4>
+        <h4>Hello <?= $user[0]['fname'] . ' ' . $user[0]['lname'] ?></h4>
         <div class="d-md-flex col m-1">
-            <img src="img/products/aila.svg" alt="username" class="img-sm">
-            <span class="m-2">
-                <p>Name</p>
-                <p>Address</p>
-            </span>
+            <img src="img/products/default-image.png" alt="username" class="img-sm">
         </div>
         <div class="col">
             <form action="" method="post" enctype="multipart/form-data">
@@ -64,11 +65,11 @@ if (!$loggedin) { ?>
             <form action="" method="post">
                 <div class="form-group">
                     <label for="fname">First Name</label>
-                    <input name="fName" type="text" id="fname" class="form-control" maxlength="20" required>
+                    <input name="fName" type="text" id="fname" pattern="^[a-zA-Z]+$" class="form-control" maxlength="20" required>
                     <label for="lname">Last Name</label>
-                    <input name="lName" type="text" id="lname" class="form-control" maxlength="20" required>
+                    <input name="lName" type="text" id="lname" pattern="^[a-zA-Z]+$" class="form-control" maxlength="20" required>
                     <label for="email">Email</label>
-                    <input name="email" type="email" id="email" class="form-control" required>
+                    <input name="email" type="email" id="email" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" class="form-control" required>
                     <label for="password">Password</label>
                     <input name="password" type="password" id="password" class="form-control" maxlength="20" required>
                     <input value="Submit" class="btn btn-outline-primary mt-3" type="submit">
@@ -81,7 +82,7 @@ if (!$loggedin) { ?>
                 <div class="form-group"><label for="oldpass">Old Password</label>
                     <input name="oldpass" type="password" id="oldpass" class="form-control" maxlength="20" required>
                     <label for="newpass">New Password</label>
-                    <input name="newpass" type="text" id="newpass" class="form-control" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,20}$" title="password needs to have atleast 
+                    <input name="newpass" type="password" id="newpass" class="form-control" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,20}$" title="password needs to have atleast 
 1 lowercase letter
 1 digit 
 1 uppercase letter and 

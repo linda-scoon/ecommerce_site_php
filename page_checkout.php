@@ -9,11 +9,11 @@ require('includes/site_header.php');
             <h4>Contact Information</h4>
             <div class="form-group">
                 <label for="fname">First Name</label>
-                <input type="text" name="fname" id="fname" class="form-control" >
+                <input type="text" name="fname" id="fname" pattern="^[a-zA-Z]+$" class="form-control">
                 <label for="lname">Last Name</label>
-                <input type="text" name="lname" id="lname" class="form-control">
+                <input type="text" name="lname" id="lname" pattern="^[a-zA-Z]+$" class="form-control">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="form-control">
+                <input type="email" name="email" id="email" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" class="form-control">
                 <label for="tel">Phone</label>
                 <input type="tel" name="tel" id="tel" class="form-control" required>
             </div>
@@ -22,7 +22,7 @@ require('includes/site_header.php');
             <h4>Shipping Information</h4>
             <div class="form-group">
                 <label for="add1">Address line 1</label>
-                <input type="text" name="add1" id="add1" class="form-control"required>
+                <input type="text" name="add1" id="add1" class="form-control" required>
                 <label for="add2">Address line 2</label>
                 <input type="text" name="add2" id="add2" class="form-control">
                 <label for="city">City</label>
@@ -61,7 +61,7 @@ require('includes/site_header.php');
                     </div>
                     <div class="form-group col-5 mx-1">
                         <label for="enddate">Expiry Date</label>
-                        <input type="date" name="enddate" id="enddate"class="form-control" required>
+                        <input type="date" name="enddate" id="enddate" class="form-control" required>
                     </div>
                     <div class="form-group col-2 mx-1">
                         <label for="csc">CSC</label>

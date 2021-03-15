@@ -35,13 +35,13 @@ echo $msg;
     <div class="form-group col-lg-6 offset-lg-3 border p-5">
         <h4>Sign Up</h4>
         <label for="fname">First Name</label>
-        <input name="fname" value="<?= htmlspecialchars($fname) ?>" type="text" id="fname" class="form-control" maxlength="20" required>
+        <input name="fname" value="<?= htmlspecialchars($fname) ?>" type="text" id="fname" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20" required>
         <label for="lname">Last Name</label>
-        <input name="lname" value="<?= htmlspecialchars($lname) ?>" type="text" id="lname" class="form-control" maxlength="20" required>
+        <input name="lname" value="<?= htmlspecialchars($lname) ?>" type="text" id="lname" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20" required>
         <label for="email">Email</label>
-        <input name="email" value="<?= htmlspecialchars($email) ?>" type="email" id="email" class="form-control" required>
+        <input name="email" value="<?= htmlspecialchars($email) ?>" type="email" id="email" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" class="form-control" required>
         <label for="password1">Password</label>
-        <input name="password1" type="text" id="password1" class="form-control" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,20}$" title="password needs to have atleast 
+        <input name="password1" type="password" id="password1" class="form-control" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,20}$" title="password needs to have atleast 
 1 lowercase letter 
 1 digit 
 1 uppercase letter and 
