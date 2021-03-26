@@ -31,3 +31,22 @@ function isavailable_email($conn, $email)
     }
     return false;
 }
+
+/**
+ * adds users to database
+ *
+ * @param object $conn
+ * @param string $email
+ * @param string $fname
+ * @param string $lname
+ * @param string $password
+ * @return void if success false if failure
+ */
+function add_user($conn, $email, $fname, $lname, $password)
+{
+    $query = "INSERT INTO users (email, fname, lname, user_password) VALUES ('" . $email . "','" . $fname . "','" . $lname . "','" . $password . "');";
+
+    if (db_insert($conn, $query)) {
+        return false;
+    }
+}

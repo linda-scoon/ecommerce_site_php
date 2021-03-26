@@ -20,8 +20,7 @@ if (!empty($_POST)) {
     } else if ($_POST['password1'] !== $_POST['password2']) {
         $msg = '<p class="text-danger err-text mt-5 fw-bolder">Passwords don\'t match</p>';
     } else {
-        $query = "INSERT INTO users (email, fname, lname, user_password) VALUES ('" . $email . "','" . $fname . "','" . $lname . "','" . $password . "');";
-        if (db_insert($conn, $query)) {
+        if (add_user($conn, $email, $fname, $lname, $password)) {
             $msg = '<p class="text-success err-text mt-5 fw-bolder">Your account has been created, you may now go to the log in page to log in</p>';
         }
     }

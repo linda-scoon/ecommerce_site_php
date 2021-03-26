@@ -5,8 +5,7 @@ require('includes/site_header.php');
 $num_cols = 4;
 
 // retrieving data from database
-$query = 'SELECT * FROM products';
-$products = db_fetch($conn, $query);
+$products = retrieve_products($conn);
 
 //calculating number of columns
 $num_rows = sizeof($products) / $num_cols;
