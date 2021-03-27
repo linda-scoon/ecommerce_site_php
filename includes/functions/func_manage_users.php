@@ -61,8 +61,9 @@ function add_user($conn, $email, $fname, $lname, $password)
     $query = "INSERT INTO users (email, fname, lname, user_password) VALUES ('" . $email . "','" . $fname . "','" . $lname . "','" . $password . "');";
 
     if (db_insert($conn, $query)) {
-        return false;
+        return true;
     }
+    return false;
 }
 
 /**
@@ -77,4 +78,18 @@ function retrieve_user($conn, $email)
     $email = mysqli_real_escape_string($conn, $email);
     $query = "SELECT * FROM Users WHERE email='" . $email . "'";
     return db_fetch($conn, $query);
+}
+
+/**
+ * redirects the user, if the user was about to checkout redirect them to checkout page else redirect to profile
+ *
+ * @return void
+ */
+function redirect()
+{
+    if ($_SESSION['checkout']) {
+        header("Location: page_checkout.php");
+    } else {
+        header("Location: page_profile.php");
+    }
 }

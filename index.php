@@ -2,6 +2,7 @@
 <?php
 $page_title = 'Product Listings';
 require('includes/site_header.php');
+$state_msg = $_SESSION['state_msg'] ?? '';
 $num_cols = 4;
 
 // retrieving data from database
@@ -9,12 +10,12 @@ $products = retrieve_products($conn);
 
 //calculating number of columns
 $num_rows = sizeof($products) / $num_cols;
-print_r($_SESSION);
+
 // product cards
 $counter = 0;
 for ($i = 0; $i < $num_rows; $i++) {
 ?>
-    <div class="row d-flex justify-content-center text-warning fw-bolder"><?= htmlspecialchars($_SESSION['state_msg']) ?? '' ?></div>
+    <div class="row d-flex justify-content-center text-info fw-bolder"><?= htmlspecialchars($state_msg) ?></div>
     <section class="row mt-5">
         <?php
         for ($j = 0; $j < $num_cols; $j++) {

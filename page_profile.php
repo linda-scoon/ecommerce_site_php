@@ -1,18 +1,19 @@
 <?php
 $page_title = 'Profile';
 require('includes/site_header.php');
+$state_msg = $_SESSION['state_msg'] ?? '';
 
 if (!isset($_SESSION['email'])) {
-    header("Location: index.php");
+    header("Location: page_login.php");
 }
 
 // getting user details
 $user = retrieve_user($conn, $_SESSION['email']);
 ?>
-
+<div class="row d-flex justify-content-center text-info fw-bolder mt-4"><?= htmlspecialchars($state_msg) ?></div>
 <h1 class="my-5">Profile Page</h1>
 <section class="row border p-5 my-1">
-    <h4>Hello <?= $user[0]['fname'] . ' ' . $user[0]['lname'] ?></h4>
+    <h4>Hello <?= htmlspecialchars($user[0]['fname']) . ' ' . htmlspecialchars($user[0]['lname']) ?></h4>
     <div class="d-md-flex col m-1">
         <img src="img/products/default-image.png" alt="username" class="img-sm">
     </div>
@@ -67,5 +68,6 @@ be between 6-20 characters long" required>
 </section>
 
 <?php
+unset($_SESSION['state_msg']);
 require('includes/site_footer.php');
 ?>

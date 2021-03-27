@@ -2,6 +2,9 @@
 $page_title = 'Checkout';
 require('includes/site_header.php');
 
+//keep track of whether the customer has visited the chechout page
+$_SESSION['checkout'] = true;
+
 if (!isset($_SESSION['email'])) {
     header("Location: page_login.php");
 }
@@ -100,5 +103,6 @@ if (!isset($_SESSION['email'])) {
     <input type="submit" value="Place Order" class="btn btn-lg btn-outline-success ms-auto">
 </form>
 
-<?php require('includes/site_footer.php');
+<?php
+require('includes/site_footer.php');
 ?>
