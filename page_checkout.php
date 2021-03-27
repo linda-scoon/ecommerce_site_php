@@ -1,6 +1,10 @@
 <?php
 $page_title = 'Checkout';
 require('includes/site_header.php');
+
+if (!isset($_SESSION['email'])) {
+    header("Location: page_login.php");
+}
 ?>
 <h1 class="my-5">Checkout # of items</h1>
 <form action="page_success.php" method="post">

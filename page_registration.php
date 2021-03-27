@@ -2,26 +2,20 @@
 $page_title = 'Registration';
 require('includes/site_header.php');
 
-$email = '';
-$fname = '';
-$lname = '';
+if (isset($_SESSION['email'])) {
+    header("Location: page_profile.php");
+}
 $msg = '';
 
 if (!empty($_POST)) {
 
-    //sanitising inputs
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password1']);
-    $fname = mysqli_real_escape_string($conn, $_POST['fname']);
-    $lname = mysqli_real_escape_string($conn, $_POST['lname']);
-
-    if (!isavailable_email($conn, $email)) {
-        $msg = '<p class="text-danger err-text mt-5 fw-bolder">This email already exists please go to login</p>';
+    if (!isavailable_email($conn, $_POST['email'])) {
+        $msg = '<div class="text-danger fw-bolder row d-flex justify-content-center mt-5">This email already exists please go to login</div>';
     } else if ($_POST['password1'] !== $_POST['password2']) {
-        $msg = '<p class="text-danger err-text mt-5 fw-bolder">Passwords don\'t match</p>';
+        $msg = '<div class="text-danger fw-bolder row d-flex justify-content-center mt-5">Passwords don\'t match</div>';
     } else {
-        if (add_user($conn, $email, $fname, $lname, $password)) {
-            $msg = '<p class="text-success err-text mt-5 fw-bolder">Your account has been created, you may now go to the log in page to log in</p>';
+        if (add_user($conn, $_POST['email'], $_POST['fname'], $_POST['lname'], $_POST['password1'])) {
+            header("Location: page_profile.php");
         }
     }
 }
@@ -34,11 +28,11 @@ echo $msg;
     <div class="form-group col-lg-6 offset-lg-3 border p-5">
         <h4>Sign Up</h4>
         <label for="fname">First Name</label>
-        <input name="fname" value="<?= htmlspecialchars($fname) ?>" type="text" id="fname" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20" required>
+        <input name="fname" value="<?= htmlspecialchars($fname) ?? '' ?>" type="text" id="fname" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20" required>
         <label for="lname">Last Name</label>
-        <input name="lname" value="<?= htmlspecialchars($lname) ?>" type="text" id="lname" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20" required>
+        <input name="lname" value="<?= htmlspecialchars($lname) ?? '' ?>" type="text" id="lname" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20" required>
         <label for="email">Email</label>
-        <input name="email" value="<?= htmlspecialchars($email) ?>" type="email" id="email" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" placeholder="email@example.com" title="please enter a valid email" class="form-control" required>
+        <input name="email" value="<?= htmlspecialchars($email) ?? '' ?>" type="email" id="email" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" placeholder="email@example.com" title="please enter a valid email" class="form-control" required>
         <label for="password1">Password</label>
         <input name="password1" type="password" id="password1" class="form-control" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,20}$" title="password needs to have atleast 
 1 lowercase letter 

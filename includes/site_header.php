@@ -22,19 +22,38 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item ">
                             <a class="nav-link bi-house mx-1" href="index.php" title="home">
-                                <span class="nav-hidden ms-1">Home</span>
+                                <span class="ms-1">Home</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link bi-basket mx-1" href="page_basket.php" title="basket">
-                                <span class="nav-hidden ms-1">Basket</span>
+                                <span class="ms-1">Basket</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link bi-person-fill mx-1" href="page_login.php" title="login">
-                                <span class="nav-hidden ms-1">Login</span>
-                            </a>
-                        </li>
+                        <?php
+                        if (!isset($_SESSION['email'])) {
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link bi-person-fill mx-1" href="page_login.php" title="login">
+                                    <span class="ms-1">Login</span>
+                                </a>
+                            </li>
+                        <?php
+                        } else {
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link bi-person-fill mx-1" href="page_profile.php" title="profile">
+                                    <span class="ms-1">Profile</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-1" href="page_logout.php" title="logout">
+                                    <span class="ms-1">Logout</span>
+                                </a>
+                            </li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>

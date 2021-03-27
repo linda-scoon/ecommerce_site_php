@@ -4,7 +4,7 @@ require('includes/site_header.php');
 
 // retrieving data from database
 if (isset($_GET['product_id'])) {
-    $product_id = mysqli_real_escape_string($conn, $product_id);
+    $product_id = mysqli_real_escape_string($conn, $_GET['product_id']);
     $products = retrieve_products($conn, $product_id);
 
     //if product does not exist
