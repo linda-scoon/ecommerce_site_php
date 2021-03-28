@@ -40,7 +40,8 @@ function addto_basket($conn, $product_id, $quantity)
             if (isset($_SESSION['basket'])) {
                 //this shall provide the next empty slot in the basket array, I know its super hacky but it works
                 //retrieving the maximum index in the array then adding 1 to it to get next available index
-                $num_products = max(array_keys($_SESSION['basket'], max($_SESSION['basket']))) + 1;
+                //if basket is empty start from 0;
+                $num_products = !empty($_SESSION['basket']) ? (max(array_keys($_SESSION['basket'], max($_SESSION['basket']))) + 1) : 0;
                 $in_basket = false;
 
                 // checking if the product is already in the basket
