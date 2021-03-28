@@ -7,7 +7,7 @@ $msg = '';
 if (isset($_GET['product_id']) && isset($_GET['quantity'])) {
 
     // adding product and checking if product has been successfully added
-    if (add_basket($conn, $_GET['product_id'], $_GET['quantity'])) {
+    if (addto_basket($conn, $_GET['product_id'], $_GET['quantity'])) {
 
         // redirecting to self inorder to prevent resubmission on refresh
         header("Location: page_basket.php");

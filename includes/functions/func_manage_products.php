@@ -25,7 +25,7 @@ function retrieve_products($conn, $product_id = null)
  * @param int $quantity
  * @return boolean $success
  */
-function add_basket($conn, $product_id, $quantity)
+function addto_basket($conn, $product_id, $quantity)
 {
     $success = false;
 
@@ -38,8 +38,9 @@ function add_basket($conn, $product_id, $quantity)
         if (!empty($products)) {
 
             if (isset($_SESSION['basket'])) {
-                // since array index begins at 0, this shall provide the next empty slot in the array
-                $num_products = count($_SESSION['basket']);
+                //this shall provide the next empty slot in the basket array, I know its super hacky but it works
+                //retrieving the maximum index in the array then adding 1 to it to get next available index
+                $num_products = max(array_keys($_SESSION['basket'], max($_SESSION['basket']))) + 1;
                 $in_basket = false;
 
                 // checking if the product is already in the basket
