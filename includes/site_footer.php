@@ -43,7 +43,7 @@
     <!-- Copyrights -->
     <div class="text-center p-3 bg-dark text-light">
         © 2020 Copyright:
-        <a href="https://purplefootsteps.com/">purplefootsteps.com</a>
+        <a href="https://purplefootsteps.co.uk/">purplefootsteps.co.uk</a>
     </div>
 </footer>
 <script src="/js/script.js"></script>

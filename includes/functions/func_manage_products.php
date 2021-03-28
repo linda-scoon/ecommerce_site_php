@@ -55,16 +55,12 @@ function add_basket($product_id, $quantity)
     }
 }
 
-function update_basket($product_id, $quantity, $action)
+function update_basket($product_id, $quantity)
 {
-    // finding product in basket and carrying out the requested action
+    // finding product in basket and setting its quantity to the new quantity
     foreach ($_SESSION['basket'] as $key => $product) {
         if ($product_id === $product['id']) {
-            if ($action == 'delete') {
-                unset($_SESSION['basket'][$key]);
-            } else if ($action == 'update') {
-                $_SESSION['basket'][$key]['quantity'] == $quantity;
-            }
+            $_SESSION['basket'][$key]['quantity'] = $quantity;
         }
     }
 }

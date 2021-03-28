@@ -21,7 +21,7 @@ if (isset($_GET['product_id'])) {
                 <h2><?= htmlspecialchars($products[0]['product_name']) ?></h2>
                 <p class="multiline-text"><?= htmlspecialchars($products[0]['product_desc']) ?></p>
                 <h4 class=""><?= '£' . htmlspecialchars($products[0]['price']) ?></h4>
-                <form action="page_basket.php" method="post">
+                <form action="page_basket.php" method="get">
                     <div class="form-group">
                         <div class="d-flex flex-column">
                             <label for="quantity">Select Quantity</label>
