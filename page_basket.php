@@ -62,7 +62,7 @@ if (isset($_SESSION['basket'])) {
         <h2>Total to pay = £<?= $total ?></h2>
     </div>
     <div class="col">
-        <a href="page_checkout.php" class="btn btn-lg btn-success mt-md-5">Checkout</a>
+        <button <?php if ($num_items == 0) { ?> disabled <?php } ?> class="btn btn-lg btn-success mt-md-5">Checkout</button>
     </div>
 </section>
 <?php require('includes/site_footer.php');
