@@ -1,13 +1,19 @@
 <?php
 $page_title = 'Shopping Basket';
 require('includes/site_header.php');
+$msg = '';
 
 // if product ID and quantity are set call add to basket method
 if (isset($_GET['product_id']) && isset($_GET['quantity'])) {
-    add_basket($_GET['product_id'], $_GET['quantity']);
 
-    // redirecting to self inorder to prevent resubmission on refresh
-    header("Location: page_basket.php");
+    // adding product and checking if product has been successfully added
+    if (add_basket($conn, $_GET['product_id'], $_GET['quantity'])) {
+
+        // redirecting to self inorder to prevent resubmission on refresh
+        header("Location: page_basket.php");
+    } else {
+        $msg = "The product you are after is not available";
+    }
 }
 
 // if update has been clicked call update function to update product in basket
@@ -22,7 +28,7 @@ if (isset($_GET['action'])) {
     }
 }
 ?>
-
+<div class="row d-flex justify-content-center text-warning fw-bolder"><?= htmlspecialchars($msg) ?></div>
 <h1 class="my-5">Shopping Basket</h1>
 <hr>
 <?php
@@ -31,6 +37,7 @@ $num_items = 0;
 
 // if the basket session variable has items loop through all items and display
 if (isset($_SESSION['basket'])) {
+
     // variable for label and input id's
     $id = 1;
 
@@ -85,5 +92,6 @@ if (isset($_SESSION['basket'])) {
         </form>
     </div>
 </section>
-<?php require('includes/site_footer.php');
+<?php
+require('includes/site_footer.php');
 ?>

@@ -23,38 +23,59 @@ function retrieve_products($conn, $product_id = null)
  *
  * @param int $product_id
  * @param int $quantity
- * @return void
+ * @return boolean $success
  */
-function add_basket($product_id, $quantity)
+function add_basket($conn, $product_id, $quantity)
 {
-    if (isset($_SESSION['basket'])) {
-        // since array index begins at 0, this shall provide the next empty slot in the array
-        $num_products = count($_SESSION['basket']);
-        $in_basket = false;
+    $success = false;
 
-        // checking if the product is already in the basket
-        foreach ($_SESSION['basket'] as $key => $product) {
-            if ($product_id === $product['id']) {
-                $_SESSION['basket'][$key]['quantity'] += $quantity;
-                $in_basket = true;
+    //validation
+    //check that both quantity and id are integers
+    if (is_numeric($product_id) && is_numeric($quantity)) {
+        $products = retrieve_products($conn, $product_id);
+
+        //check if product exists
+        if (!empty($products)) {
+
+            if (isset($_SESSION['basket'])) {
+                // since array index begins at 0, this shall provide the next empty slot in the array
+                $num_products = count($_SESSION['basket']);
+                $in_basket = false;
+
+                // checking if the product is already in the basket
+                foreach ($_SESSION['basket'] as $key => $product) {
+                    if ($product_id === $product['id']) {
+                        $_SESSION['basket'][$key]['quantity'] += $quantity;
+                        $in_basket = true;
+                    }
+                }
+
+                //if product is not in basket, add product to basket
+                if (!$in_basket) {
+                    $_SESSION['basket'][$num_products] = array(
+                        'id' => $product_id,
+                        'quantity' => $quantity
+                    );
+                }
+            } else {
+                $_SESSION['basket'][0] = array(
+                    'id' => $product_id,
+                    'quantity' => $quantity
+                );
             }
+            $success = true;
         }
-
-        //if product is not in basket, add product to basket
-        if (!$in_basket) {
-            $_SESSION['basket'][$num_products] = array(
-                'id' => $product_id,
-                'quantity' => $quantity
-            );
-        }
-    } else {
-        $_SESSION['basket'][0] = array(
-            'id' => $product_id,
-            'quantity' => $quantity
-        );
     }
+    return $success;
 }
 
+/**
+ * updates product quantity in basket
+ *
+ * @param int $product_id
+ * @param int $quantity
+ * @return void
+ */
 function update_basket($product_id, $quantity)
 {
     // finding product in basket and setting its quantity to the new quantity
