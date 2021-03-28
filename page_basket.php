@@ -1,49 +1,68 @@
 <?php
 $page_title = 'Shopping Basket';
 require('includes/site_header.php');
-$numOfRows = 3
 
+// session_destroy();
+if (isset($_POST['product_id']) && isset($_POST['quantity'])) {
+    add_basket($_POST['product_id'], $_POST['quantity']);
+
+    // redirecting to self inorder to prevent resubmission on refresh
+    header("Location: page_basket.php");
+}
 ?>
 <h1 class="my-5">Shopping Basket</h1>
 <hr>
 <?php
-for ($i = 0; $i < $numOfRows; $i++) {
+$total = 0;
+$num_items = 0;
+
+// if the basket session variable has items loop through all items and display
+if (isset($_SESSION['basket'])) {
+
+    foreach ($_SESSION['basket'] as $key => $product) {
+        $products = retrieve_products($conn, $product['id']);
+        $cost = (float)($product['quantity'] * $products[0]['price']);
 ?>
-    <section class="row mt-5">
-        <div class="col-lg-3">
-            <img src="img/products/rimmel_red_thumb.jfif" alt="" class="img-thumbnail">
-        </div>
-        <div class="col-lg-5">
-            <h4>Hot red Rimmel London nail varnish</h4>
-            <form action="" method="post">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col mt-3">
-                            <label for="update<?= $i ?>">Update Quantity</label>
-                            <input type="number" name="update<?= $i ?>" id="update<?= $i ?>" class="w-25" min="1" max="100">
-                        </div>
-                        <div class="col">
-                            <input type="submit" value="Update" class="btn btn-warning mt-3 me-auto">
-                            <a href="#" class="text-danger">Delete</a>
+        <section class="row mt-5">
+            <div class="col-lg-3">
+                <img src="<?= htmlspecialchars($products[0]['img_thumb']) ?>" alt="<?= htmlspecialchars($products[0]['product_name']) ?>" class="img-thumbnail">
+            </div>
+            <div class="col-lg-5">
+                <h4><?= htmlspecialchars($products[0]['product_name']) ?></h4>
+                <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col mt-3">
+                                <label for="<?= htmlspecialchars($products[0]['product_name']) ?>">Update Quantity</label>
+                                <input type="number" name="update" value="<?= $product['quantity'] ?>" id="<?= htmlspecialchars($products[0]['product_name']) ?>" class="w-25" min="1" max="100">
+                            </div>
+                            <div class="col">
+                                <input type="submit" value="Update" title="update product quantity" class="btn btn-warning mt-3 me-auto">
+                                <a href="<?= $_SERVER['PHP_SELF'] . '?action=delete' ?>" class="text-danger">Delete</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
-        <div class="col mt-3">
-            <h4>Quantity * Price = Total</h4>
-        </div>
-    </section>
-    <hr>
+                </form>
+            </div>
+            <div class="col mt-3">
+                <h4>Cost: <?= htmlspecialchars($product['quantity']) . ' @ £' . htmlspecialchars($products[0]['price']) . ' = £' . $cost ?></h4>
+            </div>
+        </section>
+        <hr>
 <?php
-} ?>
-
+        // calculating total cost and number of items in the basket
+        $total += $cost;
+        $num_items += $product['quantity'];
+    }
+}
+?>
 <section class="row mt-3">
     <div class="col-lg-8 mb-2">
-        <h2>Subtotal(# of items): Total Price</h2>
+        <h2><?= $num_items ?> products in basket</h2>
+        <h2>Total to pay = £<?= $total ?></h2>
     </div>
     <div class="col">
-        <a href="page_checkout.php" class="btn btn-lg btn-success">Checkout</a>
+        <a href="page_checkout.php" class="btn btn-lg btn-success mt-md-5">Checkout</a>
     </div>
 </section>
 <?php require('includes/site_footer.php');

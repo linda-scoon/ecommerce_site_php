@@ -21,11 +21,11 @@ if (isset($_GET['product_id'])) {
                 <h2><?= htmlspecialchars($products[0]['product_name']) ?></h2>
                 <p class="multiline-text"><?= htmlspecialchars($products[0]['product_desc']) ?></p>
                 <h4 class=""><?= '£' . htmlspecialchars($products[0]['price']) ?></h4>
-                <form action="page_basket.php" method="get">
+                <form action="page_basket.php" method="post">
                     <div class="form-group">
                         <div class="d-flex flex-column">
                             <label for="quantity">Select Quantity</label>
-                            <input type="number" name="quantity" id="quantity" class="w-25" min="1" max="100">
+                            <input type="number" name="quantity" id="quantity" class="w-25" min="1" max="100" required>
                             <input type="hidden" name="product_id" value="<?= htmlspecialchars($products[0]['product_id']) ?>">
                             <input type="submit" value="Add to Basket" class="btn btn-lg btn-outline-success mt-3 me-auto">
                         </div>
