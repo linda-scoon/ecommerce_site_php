@@ -11,12 +11,17 @@
 function isverified_login($conn, $email, $password)
 {
     $email = mysqli_real_escape_string($conn, $email);
-    $query = "SELECT email, user_password FROM users WHERE email ='" . $email . "';";
+    $query = "SELECT * FROM users WHERE email ='" . $email . "';";
     $result = db_fetch($conn, $query);
 
     foreach ($result as $user) {
-        if ($email === $user['email'] && $password === $user['user_password']) {
-            $_SESSION['email'] = $user['email'];
+        if ($email === $user['email'] && password_verify($password, $user['user_password'])) {
+            $_SESSION['user'] = array(
+                'email' => $user['email'],
+                'fname' => $user['fname'],
+                'lname' => $user['lname'],
+                'role' => $user['user_role']
+            );
             return true;
         }
     }
@@ -56,9 +61,9 @@ function add_user($conn, $email, $fname, $lname, $password)
     $email = mysqli_real_escape_string($conn, $email);
     $fname = mysqli_real_escape_string($conn, $fname);
     $lname = mysqli_real_escape_string($conn, $lname);
-    $password = mysqli_real_escape_string($conn, $password);
+    $hash = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = "INSERT INTO users (email, fname, lname, user_password) VALUES ('" . $email . "','" . $fname . "','" . $lname . "','" . $password . "');";
+    $query = "INSERT INTO users (email, fname, lname, user_password) VALUES ('" . $email . "','" . $fname . "','" . $lname . "','" . $hash . "');";
 
     if (db_insert($conn, $query)) {
         return true;

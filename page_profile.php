@@ -3,17 +3,15 @@ $page_title = 'Profile';
 require('includes/site_header.php');
 $state_msg = $_SESSION['state_msg'] ?? '';
 
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['user'])) {
     header("Location: page_login.php");
 }
 
-// getting user details
-$user = retrieve_user($conn, $_SESSION['email']);
 ?>
 <div class="row d-flex justify-content-center text-info fw-bolder mt-4"><?= htmlspecialchars($state_msg) ?></div>
 <h1 class="my-5">Profile Page</h1>
 <section class="row border p-5 my-1">
-    <h4>Hello <?= htmlspecialchars($user[0]['fname']) . ' ' . htmlspecialchars($user[0]['lname']) ?></h4>
+    <h4>Hello <?= htmlspecialchars($_SESSION['user']['fname']) . ' ' . htmlspecialchars($_SESSION['user']['lname']) ?></h4>
     <div class="d-md-flex col m-1">
         <img src="img/products/default-image.png" alt="username" class="img-sm">
     </div>
@@ -33,11 +31,11 @@ $user = retrieve_user($conn, $_SESSION['email']);
         <form action="" method="post">
             <div class="form-group">
                 <label for="fname">First Name</label>
-                <input name="fName" type="text" id="fname" value="<?= htmlspecialchars($user[0]['fname']) ?>" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20">
+                <input name="fName" type="text" id="fname" value="<?= htmlspecialchars($_SESSION['user']['fname']) ?>" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20">
                 <label for="lname">Last Name</label>
-                <input name="lName" type="text" id="lname" value="<?= htmlspecialchars($user[0]['lname']) ?>" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20">
+                <input name="lName" type="text" id="lname" value="<?= htmlspecialchars($_SESSION['user']['lname']) ?>" pattern="^[a-zA-Z]+$" title="name has to only be in letters" class="form-control" maxlength="20">
                 <label for="email">Email</label>
-                <input name="email" type="email" id="email" value="<?= htmlspecialchars($user[0]['email']) ?>" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" placeholder="email@example.com" title="please enter a valid email" class="form-control" required>
+                <input name="email" type="email" id="email" value="<?= htmlspecialchars($_SESSION['user']['email']) ?>" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" placeholder="email@example.com" title="please enter a valid email" class="form-control" required>
                 <label for="password">Password</label>
                 <input name="password" type="password" id="password" class="form-control" maxlength="20" required>
                 <input value="Submit" class="btn btn-outline-primary mt-3" type="submit">

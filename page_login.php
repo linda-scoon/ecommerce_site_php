@@ -2,7 +2,7 @@
 $page_title = 'Login';
 require('includes/site_header.php');
 
-if (isset($_SESSION['email'])) {
+if (isset($_SESSION['user'])) {
     $_SESSION['state_msg'] = "You are already logged in";
     header("Location: index.php");
 }

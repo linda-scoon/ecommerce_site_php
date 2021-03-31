@@ -31,7 +31,8 @@
                             </a>
                         </li>
                         <?php
-                        if (!isset($_SESSION['email'])) {
+                        //including links to appear only when logged in
+                        if (!isset($_SESSION['user'])) {
                         ?>
                             <li class="nav-item">
                                 <a class="nav-link bi-person-fill mx-1" href="page_login.php" title="login">
@@ -46,6 +47,18 @@
                                     <span class="ms-1">Profile</span>
                                 </a>
                             </li>
+                            <?php
+                            //only allowing admins to view this link
+                            if ($_SESSION['user']['role'] == 'admin') { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link mx-1" href="page_manage-products.php" title="products">
+                                        <span class="ms-1">Admin</span>
+                                    </a>
+                                </li>
+                            <?php
+
+
+                            } ?>
                             <li class="nav-item">
                                 <a class="nav-link mx-1" href="page_logout.php" title="logout">
                                     <span class="ms-1">Logout</span>

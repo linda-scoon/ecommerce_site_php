@@ -2,7 +2,7 @@
 $page_title = 'Registration';
 require('includes/site_header.php');
 
-if (isset($_SESSION['email'])) {
+if (isset($_SESSION['user'])) {
     $_SESSION['state_msg'] = "You are already logged in";
     header("Location: page_profile.php");
 }
@@ -20,7 +20,7 @@ if (!empty($_POST)) {
     } else {
         if (add_user($conn, $email, $fname, $lname, $_POST['password1'])) {
             if (isverified_login($conn, $email, $_POST['password1'])) {
-                $_SESSION['state_msg']='You have successfully registered and are now logged in';
+                $_SESSION['state_msg'] = 'You have successfully registered and are now logged in';
                 redirect();
             }
         }
