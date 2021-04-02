@@ -102,34 +102,5 @@ if (isset($_POST['submit'])) {
         </div>
     </form>
 </section>
-<h2 class="my-5">Update products</h2>
-
-<h2 class="my-5">List of All Products</h2>
-
-<?php
-
-// retrieve and display all products
-if ($products = retrieve_products($conn)) {
-
-    // variable for label and input id's
-    $id = 1;
-    foreach ($products as $product) {
-?>
-        <section class="row mt-5">
-            <div class="col-lg-3">
-                <img src="<?= htmlspecialchars($product['img_thumb']) ?>" alt="<?= htmlspecialchars($product['product_name']) ?>" class="img-thumbnail">
-            </div>
-            <div class="col-lg-5">
-                <h4><?= htmlspecialchars($product['product_name']) ?></h4>
-                <p class="multiline-text"><?= htmlspecialchars($product['product_desc']) ?></p>
-                <h4>Price: <?= '£' . htmlspecialchars($products[0]['price']) ?></h4>
-            </div>
-        </section>
-        <hr>
-<?php
-        $id++;
-    }
-}
-?>
 <?php
 require('includes/site_footer.php');

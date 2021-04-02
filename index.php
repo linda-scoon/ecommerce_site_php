@@ -19,21 +19,27 @@ for ($i = 0; $i < $num_rows; $i++) {
 ?>
     <section class="row mt-5">
         <?php
-        for ($j = 0; $j < $num_cols && $counter < count($products); $j++) {
+        for ($j = 0; $j < $num_cols; $j++) {
 
             if ($j == 2) { ?>
                 <!-- Force next columns to break to new line before lg breakpoint -->
                 <div class="w-100 d-lg-none d-block"></div>
             <?php
             }
-            $product = $products[$counter++];
+            $product = $products[$counter++] ?? null;
+            $prod_id = $product['product_id'] ?? '';
+            $img_thumb = $product['img_thumb'] ?? '';
+            $prod_name = $product['product_name'] ?? '';
+            $price = $product['price'] ?? '';
+            $currency_sign = isset($product['price']) ? '£' : '';
+
             ?>
             <div class="card col m-1">
-                <a href="page_product_details.php?product_id=<?= urlencode($product['product_id']) ?>">
-                    <img class="card-img-top img-sm" src="<?= htmlspecialchars($product['img_thumb']) ?>">
+                <a href="page_product_details.php?product_id=<?= urlencode($prod_id) ?>">
+                    <img class="card-img-top img-sm" src="<?= htmlspecialchars($img_thumb) ?>">
                     <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($product['product_name']) ?></h5>
-                        <p class=""><?= '£' . htmlspecialchars($product['price']) ?></p>
+                        <h5 class="card-title"><?= htmlspecialchars($prod_name) ?></h5>
+                        <p><?= $currency_sign . htmlspecialchars($price) ?></p>
                     </div>
                 </a>
             </div>
