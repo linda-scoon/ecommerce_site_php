@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 ?>
-<div class="row d-flex justify-content-center text-info fw-bolder mt-4"><?= htmlspecialchars($state_msg) ?></div>
+<div class="row d-flex justify-content-center text-warning fw-bolder mt-4"><?= htmlspecialchars($state_msg) ?></div>
 <h1 class="my-5">Profile Page</h1>
 <section class="row border p-5 my-1">
     <h4>Hello <?= htmlspecialchars($_SESSION['user']['fname']) . ' ' . htmlspecialchars($_SESSION['user']['lname']) ?></h4>
@@ -19,14 +19,14 @@ if (!isset($_SESSION['user'])) {
         <form action="" method="post" enctype="multipart/form-data">
             <div class="form-group ">
                 <h4>Update profile picture</h4>
-                <input type="file" name="profile_pic" id="profile_pic">
-                <input type="submit" name="submit" value="Upload Image" class="btn-primary mt-3 me-auto">
+                <input type="file" name="profile_pic" class="form-control" id="profile_pic">
+                <input type="submit" name="submit" value="Upload Image" class="btn btn-info mt-3 me-auto">
             </div>
         </form>
     </div>
 </section>
 <section class="row">
-    <div class="col p-5 border m-1">
+    <div class="col-lg p-5 border m-1">
         <h4>Update Personal Details</h4>
         <form action="" method="post">
             <div class="form-group">
@@ -38,11 +38,11 @@ if (!isset($_SESSION['user'])) {
                 <input name="email" type="email" id="email" value="<?= htmlspecialchars($_SESSION['user']['email']) ?>" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" placeholder="email@example.com" title="please enter a valid email" class="form-control" required>
                 <label for="password">Password</label>
                 <input name="password" type="password" id="password" class="form-control" maxlength="20" required>
-                <input value="Submit" class="btn btn-outline-primary mt-3" type="submit">
+                <input value="Submit" name="submit" class="btn btn-outline-primary mt-3" type="submit">
             </div>
         </form>
     </div>
-    <div class="col p-5 border m-1">
+    <div class="col-lg p-5 border m-1">
         <h4>Change Password</h4>
         <form action="" method="post">
             <div class="form-group"><label for="oldpass">Old Password</label>
@@ -55,7 +55,7 @@ if (!isset($_SESSION['user'])) {
 be between 6-20 characters long" required>
                 <label for="password2">Confirm New Password</label>
                 <input name="password2" type="password" id="password2" class="form-control" maxlength="20" required>
-                <input value="Submit" class="btn btn-outline-primary mt-3" type="submit">
+                <input value="Submit" name="submit" class="btn btn-outline-primary mt-3" type="submit">
             </div>
         </form>
     </div>

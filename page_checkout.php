@@ -5,7 +5,7 @@ require('includes/site_header.php');
 //keep track of whether the customer has visited the chechout page
 $_SESSION['checkout'] = true;
 
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['user'])) {
     header("Location: page_login.php");
 }
 ?>

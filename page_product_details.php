@@ -27,7 +27,7 @@ if (isset($_GET['product_id'])) {
                             <label for="quantity">Select Quantity</label>
                             <input type="number" name="quantity" id="quantity" class="w-25" min="1" max="100" required>
                             <input type="hidden" name="product_id" value="<?= htmlspecialchars((int)$products[0]['product_id']) ?>">
-                            <input type="submit" value="Add to Basket" class="btn btn-lg btn-outline-success mt-3 me-auto">
+                            <input type="submit" value="Add to Basket" name="submit" class="btn btn-lg btn-outline-success mt-3 me-auto">
                         </div>
                     </div>
                 </form>

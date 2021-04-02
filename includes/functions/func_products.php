@@ -87,3 +87,31 @@ function update_basket($product_id, $quantity)
         }
     }
 }
+
+/**
+ * adds products to database
+ *
+ * @param object $conn
+ * @param string $prod_name
+ * @param float $price
+ * @param string $desc
+ * @param string $img_thumb
+ * @param string $img_full
+ * @return boolean
+ */
+function add_products($conn, $prod_name, $price, $desc, $img_thumb, $img_full)
+{
+    //sanitising inputs
+    $prod_name = mysqli_real_escape_string($conn, $prod_name);
+    $price = (float) $price;
+    $desc = mysqli_real_escape_string($conn, $desc);
+    $img_thumb = mysqli_real_escape_string($conn, $img_thumb);
+    $img_full = mysqli_real_escape_string($conn, $img_full);
+
+    $query = "INSERT INTO users (product_name, price, procuct_desc, img_thumb. img_full) VALUES ('" . $prod_name . "','" . $price . "','" . $desc . "','" . $img_thumb . "','" . $img_full . "');";
+
+    if (db_insert($conn, $query)) {
+        return true;
+    }
+    return false;
+}

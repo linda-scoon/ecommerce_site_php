@@ -6,8 +6,9 @@ if (DEBUG) {
     ini_set('display_errors', 1);
 }
 require('includes/functions/func_db.php');
-require('includes/functions/func_manage_users.php');
-include('includes/functions/func_manage_products.php');
+require('includes/functions/func_users.php');
+require('includes/functions/func_products.php');
+require("includes/functions/func_imgs.php");
 
 // connect to the database
 $conn = db_connect($config);

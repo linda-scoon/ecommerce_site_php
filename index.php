@@ -15,7 +15,7 @@ $num_rows = sizeof($products) / $num_cols;
 $counter = 0;
 for ($i = 0; $i < $num_rows; $i++) {
 ?>
-    <div class="row d-flex justify-content-center text-info fw-bolder"><?= htmlspecialchars($state_msg) ?></div>
+    <div class="row d-flex justify-content-center text-warning fw-bolder"><?= htmlspecialchars($state_msg) ?></div>
     <section class="row mt-5">
         <?php
         for ($j = 0; $j < $num_cols; $j++) {

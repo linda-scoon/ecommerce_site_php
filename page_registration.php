@@ -11,7 +11,7 @@ $lname = $_POST['lname'] ?? '';
 $email = $_POST['email'] ?? '';
 $msg = '';
 
-if (!empty($_POST)) {
+if (!isset($_POST['submit'])) {
 
     if (!isavailable_email($conn, $_POST['email'])) {
         $msg = '<div class="text-danger fw-bolder row d-flex justify-content-center mt-5">This email already exists please go to login</div>';
