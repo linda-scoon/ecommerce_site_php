@@ -12,47 +12,52 @@ $msg_thumb = '';
 $msg_full = '';
 $msg = '';
 
-//validatation
+//start validatation
 $prod_name = $_POST['prod-name'] ?? '';
-$price = $_POST['price'] ?? 1;
+$price = $_POST['price'] ?? 2;
 $desc = $_POST['desc'] ?? '';
-$img_thumb = $_FILES['img-thumb'] ?? '';
-$img_full = $_FILES['img-full'] ?? '';
 
 $errors = array(
     -1 => 'No image has been selected',
-    0 => 'Your image has been successfully uploaded',
-    1 => 'There has been an error uploading your images',
-    2 => 'Your thumbnail image needs to be less than ... and your full image needs to be less than ...',
-    3 => 'The dimension of your thumbnail need to be between ... and ... <br> The dimensions of your full image need to be between ... and ... ',
+    0 => '', //success
+    1 => 'There has been an error uploading the image',
+    2 => 'The file type is not allowed. Allowed file types are jpg & png',
+    3 => 'The thumbnail image needs to be less than 500 kilobytes and the full image needs to be less than 1 megabyte',
+    4 => 'The dimensions of the thumbnail need to be less than or equal to 300 x 300 pixels. The dimensions of the full image need to be less than or equal to 600 x 400 pixels',
 );
 
 if (isset($_POST['submit'])) {
 
     //validate post input
-    print_r(getimagesize($img_thumb['tmp_name'])[0]);
+
+
+
+
+    $img_thumb = ($_FILES['img-thumb']['error'] == 4) ? null : $_FILES['img-thumb'];
+    $img_full = ($_FILES['img-full']['error'] == 4) ? null : $_FILES['img-full'];
 
     //validate images. if image is set call validation function else set error code to -1
-    $thumb_code = ($_FILES['img-thumb']) ? process_img($img_thumb, 'thumbnail') : -1;
-    $full_code = ($_FILES['img-full']) ? process_img($img_full, 'full') : -1;
+    $thumb_code = isset($img_thumb) ? process_img($img_thumb, 'thumbnail') :  -1;
+    $full_code = isset($img_full) ? process_img($img_full, 'full') : -1;
 
-    //get error message
+    // //get error messages to display
     $msg_thumb = $errors[$thumb_code];
     $msg_full = $errors[$full_code];
-    echo "img/products/" . ($img_full['name'] ?? 'default-image.png');
 
-    //add product to database if images have been successfully saved
+    // // //add product to database if images have been successfully saved
     if ($thumb_code == 0 && $full_code == 0) {
 
         //set to default image if image has not been set for whatever reason
-        $thumb = "img/products/" . ($img_thumb['name'] ?? 'default-image.png');
-        $full =  "img/products/" . ($img_full['name'] ?? 'default-image.png');
+        $thumb = !empty($img_thumb['name']) ? $img_thumb['name'] : 'default-image.png';
+        $full = !empty($img_full['name']) ? $img_full['name'] : 'default-image.png';
+
+        $path = "img/products/";
 
         //Add product to database
-        // if (add_products($conn, $prod_name, $price, $desc, $thumb, $full)) {
+        // if (add_products($conn, $prod_name, $price, $desc, $path . $thumb, $path . $full)) {
         //     $msg = 'The product has been successfully added';
-        // }else{
-        //     $msg='An error occured whilst try to add the product';
+        // } else {
+        //     $msg = 'An error occured whilst try to add the product';
         // }
     }
 }
@@ -72,15 +77,16 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="col-lg-6 p-3">
                 <label for="img-thumb">Upload Thumbnail Image</label>
-                <input type="file" name="img-thumb" class="form-control" id="img-thumb" accept="jpg, jpeg, jfiff, png">
-                <div class="row d-flex justify-content-center text-danger"><?= $msg_thumb ?></div>
+                <input type="hidden" name="MAX_FILE_SIZE" value="500000" />
+                <input type="file" name="img-thumb" class="form-control" id="img-thumb" accept="jpg, jpeg, jfif, png">
+                <p class="text-danger"><?= $msg_thumb ?></p>
                 <hr>
-                <br>
                 <label for="img-full">Upload Full Image</label>
-                <input type="file" name="img-full" class="form-control" id="img-full" accept="jpg, jpeg, jfiff, png">
-                <div class="row d-flex justify-content-center text-danger"><?= $msg_full ?></div>
+                <input type="hidden" name="MAX_FILE_SIZE" value="1000000000" />
+                <input type="file" name="img-full" class="form-control" id="img-full" accept="jpg, jpeg, jfif, png">
+                <p class="text-danger"><?= $msg_full ?></p>
             </div>
-            <input type="submit" value="Add Product" name="submit" class="btn btn-info col-3 mx-auto">
+            <input type="submit" value="Add Product" name="submit" class="btn btn-primary col-3 mx-auto">
         </div>
     </form>
 </section>

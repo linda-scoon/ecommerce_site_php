@@ -6,12 +6,12 @@ if (isset($_SESSION['user'])) {
     $_SESSION['state_msg'] = "You are already logged in";
     header("Location: page_profile.php");
 }
-$fname = $_POST['fname'] ?? '';
-$lname = $_POST['lname'] ?? '';
-$email = $_POST['email'] ?? '';
+$fname = $email = isset($_POST['fname']) ? $_POST['fname'] : '';
+$lname = $email = isset($_POST['lname']) ? $_POST['lname'] : '';
+$email = $email = isset($_POST['email']) ? $_POST['email'] : '';
 $msg = '';
 
-if (!isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
 
     if (!isavailable_email($conn, $_POST['email'])) {
         $msg = '<div class="text-danger fw-bolder row d-flex justify-content-center mt-5">This email already exists please go to login</div>';

@@ -8,10 +8,10 @@ if (isset($_SESSION['user'])) {
 }
 
 // verifying login
-$email = $_POST['email'] ?? '';
+$email = isset($_POST['email']) ? $_POST['email'] : '';
 $msg = '';
 
-if (!isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
     $password = $_POST['password'];
 
     if (isverified_login($conn, $_POST['email'], $_POST['password'])) {

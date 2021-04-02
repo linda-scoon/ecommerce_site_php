@@ -29,7 +29,7 @@ for ($i = 0; $i < $num_rows; $i++) {
             ?>
             <div class="card col m-1">
                 <a href="page_product_details.php?product_id=<?= urlencode($product['product_id']) ?>">
-                    <img class="card-img-top" src="<?= htmlspecialchars($product['img_thumb']) ?>">
+                    <img class="card-img-top img-sm" src="<?= htmlspecialchars($product['img_thumb']) ?>">
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($product['product_name']) ?></h5>
                         <p class=""><?= '£' . htmlspecialchars($product['price']) ?></p>
