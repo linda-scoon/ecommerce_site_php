@@ -9,16 +9,17 @@ $num_cols = 4;
 $products = retrieve_products($conn);
 
 //calculating number of columns
-$num_rows = sizeof($products) / $num_cols;
-
+$num_rows = count($products) / $num_cols;
+?>
+<div class="row d-flex justify-content-center text-warning fw-bolder"><?= htmlspecialchars($state_msg) ?></div>
+<?php
 // product cards
 $counter = 0;
 for ($i = 0; $i < $num_rows; $i++) {
 ?>
-    <div class="row d-flex justify-content-center text-warning fw-bolder"><?= htmlspecialchars($state_msg) ?></div>
     <section class="row mt-5">
         <?php
-        for ($j = 0; $j < $num_cols; $j++) {
+        for ($j = 0; $j < $num_cols && $counter < count($products); $j++) {
 
             if ($j == 2) { ?>
                 <!-- Force next columns to break to new line before lg breakpoint -->

@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
 
     if (isverified_login($conn, $_POST['email'], $_POST['password'])) {
-        $_SESSION['state_msg'] = 'You have successfully logged in';
+        $_SESSION['state_msg'] = 'You are successfully logged in';
         redirect();
     } else {
         $msg = 'Please enter a valid login';

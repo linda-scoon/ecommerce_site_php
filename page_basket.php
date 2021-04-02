@@ -10,7 +10,7 @@ if (isset($_GET['product_id']) && isset($_GET['quantity'])) {
     if (addto_basket($conn, $_GET['product_id'], $_GET['quantity'])) {
 
         // redirecting to self inorder to prevent resubmission on refresh
-        header("Location: page_basket.php");
+        header("Location:".$_SERVER['PHP_SELF']);
     } else {
         $msg = "The product you are after is not available";
     }

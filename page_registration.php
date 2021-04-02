@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     } else {
         if (add_user($conn, $email, $fname, $lname, $_POST['password1'])) {
             if (isverified_login($conn, $email, $_POST['password1'])) {
-                $_SESSION['state_msg'] = 'You have successfully registered and are now logged in';
+                $_SESSION['state_msg'] = 'You are successfully registered and are now logged in';
                 redirect();
             }
         }

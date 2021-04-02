@@ -108,7 +108,7 @@ function add_products($conn, $prod_name, $price, $desc, $img_thumb, $img_full)
     $img_thumb = mysqli_real_escape_string($conn, $img_thumb);
     $img_full = mysqli_real_escape_string($conn, $img_full);
 
-    $query = "INSERT INTO users (product_name, price, procuct_desc, img_thumb. img_full) VALUES ('" . $prod_name . "','" . $price . "','" . $desc . "','" . $img_thumb . "','" . $img_full . "');";
+    $query = "INSERT INTO products(product_name, price, product_desc, img_thumb, img_full)VALUES('" . $prod_name . "','" . $price . "','" . $desc . "','" . $img_thumb . "','" . $img_full . "');";
 
     if (db_insert($conn, $query)) {
         return true;
