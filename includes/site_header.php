@@ -12,7 +12,7 @@
 
 <body class="lead">
     <header>
-        <nav class="navbar navbar-expand-md navbar-light bg-light p-4">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
             <div class="container">
                 <h1><a class="logo-outer" href="index.php">Nail<span class="logo-inner">Varnish</span></a></h1>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-menu">
