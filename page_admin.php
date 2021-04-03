@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
 
         //Add product to database
         if (add_products($conn, $prod_name, $price, $desc, $path . $thumb_name, $path . $full_name)) {
-            $msg = 'The product has been successfully added';
+            $msg = 'The product has been added';
             $color = 'success';
 
             //Once successfully added then save images to directory
