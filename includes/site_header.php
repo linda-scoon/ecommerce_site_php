@@ -51,13 +51,16 @@
                             //only allowing admins to view this link
                             if ($_SESSION['user']['role'] == 'admin') { ?>
                                 <li class="nav-item">
-                                    <a class="nav-link mx-1" href="page_admin.php" title="products">
+                                    <a class="nav-link mx-1" href="page_admin.php" title="admin">
                                         <span class="ms-1">Admin</span>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mx-1" href="page_encryption.php" title="encryption">
+                                        <span class="ms-1">Encryption</span>
+                                    </a>
+                                </li>
                             <?php
-
-
                             } ?>
                             <li class="nav-item">
                                 <a class="nav-link mx-1" href="page_logout.php" title="logout">

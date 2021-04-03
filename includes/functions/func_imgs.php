@@ -46,7 +46,7 @@ function process_imgname($img)
     $sliced_name = implode("_", $sliced_name); //making the array one word
 
     //give image a unique name & add last array element as the extension
-    $new_name = $sliced_name . date('Y-m-d-H-i-s') . "." . $name[count($name) - 1];
+    $new_name = $sliced_name . uniqid() . "." . $name[count($name) - 1];
     return $new_name;
 }
 
