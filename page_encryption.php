@@ -16,7 +16,10 @@ if (isset($_POST['input'])) {
         $result = $encoder->encrypt($_POST['input']);
     } elseif (isset($_POST['decrypt'])) {
         $encoder = new encryption($key, $_POST['input']);
-        $result = $encoder->decrypt();
+        //stoping errors from displaying and checking if encryption fails then display failure message
+        if(!(@$result = $encoder->decrypt())){
+            $result = 'Encryption failed. Invalid cipher';
+        }
     }
 }
 ?>
