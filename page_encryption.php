@@ -23,9 +23,7 @@ if (isset($_POST['input'])) {
 <h2 class="my-5 text-center">Enter text to encrypt or decrypt</h2>
 <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
     <div class="d-flex justify-content-center">
-        <textarea name="input" id="input" cols="30" rows="10">
-        <?= htmlspecialchars($result) ?>
-        </textarea>
+        <textarea name="input" id="input" cols="30" rows="10"><?= htmlspecialchars($result) ?></textarea>
     </div>
     <div class="d-flex justify-content-center">
         <input type="submit" name="decrypt" value="DECRYPT" class="btn btn-warning m-2">

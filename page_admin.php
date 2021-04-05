@@ -18,7 +18,7 @@ $max_desclen = 300;
 $max_namelen = 40;
 $pattern = '^([a-zA-Z0-9._ ]){4,40}$';
 $prod_name = $_POST['prod-name'] ?? '';
-$price = $_POST['price'] ?? 2.00;
+$price = $_POST['price'] ?? '';
 $desc = $_POST['desc'] ?? '';
 
 $errors = array(
