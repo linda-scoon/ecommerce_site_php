@@ -28,7 +28,7 @@ This is an ecommerce website with a functional product display, basket and login
 
 ### Built With
 
-Built with PHP
+Built with PHP and bootstrap
 
 <!-- CONTACT -->
 ## Contact
