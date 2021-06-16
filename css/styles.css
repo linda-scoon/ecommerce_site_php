@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h4 {
+  text-transform: capitalize;
+}
+
+.wrapper {
+  min-height: 50vh !important;
+}
+
+.navbar-nav li a {
+  text-transform: uppercase;
+}
+
+a:hover {
+  color: black !important;
+}
+
+.card a {
+  text-decoration: none !important;
+  text-transform: capitalize;
+  color: black;
+}
+
+.logo-outer {
+  text-decoration: none;
+  color: black;
+}
+
+.logo-inner {
+  color: red !important;
+  font-weight: 200;
+}
+
+.card-body p {
+  font-size: 1.3em;
+  font-weight: 800;
+  color: rgb(38, 182, 2);
+}
+
+.search {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.multiline-text {
+  white-space: normal;
+}
+
+.orders {
+  max-height: 550px;
+}
+
+.img-sm {
+  max-height: 300px;
+}
